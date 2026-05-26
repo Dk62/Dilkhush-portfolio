@@ -35,7 +35,10 @@ const AdminPanel = () => {
   
   // Auth Form State
   const [isLoginView, setIsLoginView] = useState(true);
-  const [registerData, setRegisterData] = useState({ username: '', password: '', confirmPassword: '' });
+  const [isForgotView, setIsForgotView] = useState(false);
+  const [forgotEmail, setForgotEmail] = useState('');
+  const [submittingForgot, setSubmittingForgot] = useState(false);
+  const [registerData, setRegisterData] = useState({ username: '', email: '', password: '', confirmPassword: '' });
 
   // --- API Configuration ---
   const api = axios.create({
@@ -70,6 +73,7 @@ const AdminPanel = () => {
     try {
       const { data } = await api.post('/admin/register', {
         username: registerData.username,
+        email: registerData.email || undefined,
         password: registerData.password
       });
       setToken(data.token);
@@ -78,6 +82,25 @@ const AdminPanel = () => {
     } catch (error) {
       console.error(error);
       toast.error(error.response?.data?.message || 'Registration failed');
+    }
+  };
+
+  const handleForgotPassword = async (e) => {
+    e.preventDefault();
+    if (!forgotEmail) {
+      return toast.error('Please enter your recovery email');
+    }
+    setSubmittingForgot(true);
+    try {
+      await api.post('/admin/forgot-password', { email: forgotEmail });
+      toast.success('Password reset link sent to your email!');
+      setForgotEmail('');
+      setIsForgotView(false);
+    } catch (error) {
+      console.error(error);
+      toast.toast ? toast.error(error.response?.data?.message || 'Failed to send recovery email') : toast.error(error.response?.data?.message || 'Failed to send recovery email');
+    } finally {
+      setSubmittingForgot(false);
     }
   };
 
@@ -278,13 +301,44 @@ const AdminPanel = () => {
       <div className="min-h-[calc(100vh-80px)] flex items-center justify-center p-6">
         <div className="bg-slate-800 p-8 rounded-2xl border border-slate-700 w-full max-w-md shadow-2xl transition-all duration-300">
           <h2 className="text-3xl font-bold text-center text-white mb-2">
-            Admin <span className="text-emerald-400">{isLoginView ? 'Login' : 'Register'}</span>
+            Admin <span className="text-emerald-400">{isForgotView ? 'Recovery' : isLoginView ? 'Login' : 'Register'}</span>
           </h2>
           <p className="text-slate-400 text-center text-sm mb-8">
-            {isLoginView ? 'Sign in to manage your portfolio' : 'Create an administrative account'}
+            {isForgotView ? 'Recover your administrative password' : isLoginView ? 'Sign in to manage your portfolio' : 'Create an administrative account'}
           </p>
 
-          {isLoginView ? (
+          {isForgotView ? (
+            <form onSubmit={handleForgotPassword} className="space-y-6">
+              <div>
+                <label className="block text-sm font-medium text-slate-300 mb-2">Recovery Email</label>
+                <input 
+                  type="email" 
+                  value={forgotEmail} 
+                  onChange={(e) => setForgotEmail(e.target.value)}
+                  className="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-emerald-500 transition-colors"
+                  placeholder="Enter recovery email"
+                  required
+                />
+              </div>
+              <button 
+                type="submit" 
+                disabled={submittingForgot}
+                className="w-full bg-emerald-500 hover:bg-emerald-400 disabled:opacity-50 text-slate-900 font-bold py-3 rounded-lg transition-colors cursor-pointer flex justify-center items-center"
+              >
+                {submittingForgot ? (
+                  <>
+                    <svg className="animate-spin h-5 w-5 text-slate-900 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    Sending Link...
+                  </>
+                ) : (
+                  'Send Reset Link'
+                )}
+              </button>
+            </form>
+          ) : isLoginView ? (
             <form onSubmit={handleLogin} className="space-y-6">
               <div>
                 <label className="block text-sm font-medium text-slate-300 mb-2">Username</label>
@@ -298,7 +352,19 @@ const AdminPanel = () => {
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-slate-300 mb-2">Password</label>
+                <div className="flex justify-between items-center mb-2">
+                  <label className="block text-sm font-medium text-slate-300">Password</label>
+                  <button 
+                    type="button" 
+                    onClick={() => {
+                      setIsForgotView(true);
+                      setForgotEmail('');
+                    }}
+                    className="text-xs text-emerald-400 hover:text-emerald-300 transition-colors focus:outline-none cursor-pointer font-semibold"
+                  >
+                    Forgot Password?
+                  </button>
+                </div>
                 <input 
                   type="password" 
                   value={loginData.password} 
@@ -323,6 +389,16 @@ const AdminPanel = () => {
                   className="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-emerald-500 transition-colors"
                   placeholder="Choose username"
                   required
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-slate-300 mb-2">Email (Optional, for recovery)</label>
+                <input 
+                  type="email" 
+                  value={registerData.email} 
+                  onChange={(e) => setRegisterData({...registerData, email: e.target.value})}
+                  className="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-emerald-500 transition-colors"
+                  placeholder="admin@example.com"
                 />
               </div>
               <div>
@@ -354,18 +430,28 @@ const AdminPanel = () => {
           )}
 
           <div className="mt-8 pt-6 border-t border-slate-700 text-center">
-            <button 
-              type="button" 
-              onClick={() => {
-                setIsLoginView(!isLoginView);
-                // Clear inputs on toggle
-                setLoginData({ username: '', password: '' });
-                setRegisterData({ username: '', password: '', confirmPassword: '' });
-              }}
-              className="text-emerald-400 hover:text-emerald-300 text-sm font-semibold transition-colors cursor-pointer focus:outline-none"
-            >
-              {isLoginView ? "Don't have an admin account? Register" : "Already have an account? Login"}
-            </button>
+            {isForgotView ? (
+              <button 
+                type="button" 
+                onClick={() => setIsForgotView(false)}
+                className="text-emerald-400 hover:text-emerald-300 text-sm font-semibold transition-colors cursor-pointer focus:outline-none"
+              >
+                Back to Login
+              </button>
+            ) : (
+              <button 
+                type="button" 
+                onClick={() => {
+                  setIsLoginView(!isLoginView);
+                  // Clear inputs on toggle
+                  setLoginData({ username: '', password: '' });
+                  setRegisterData({ username: '', email: '', password: '', confirmPassword: '' });
+                }}
+                className="text-emerald-400 hover:text-emerald-300 text-sm font-semibold transition-colors cursor-pointer focus:outline-none"
+              >
+                {isLoginView ? "Don't have an admin account? Register" : "Already have an account? Login"}
+              </button>
+            )}
           </div>
         </div>
       </div>

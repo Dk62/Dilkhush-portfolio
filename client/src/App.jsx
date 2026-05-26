@@ -7,6 +7,7 @@ import About from './pages/About';
 import Projects from './pages/Projects';
 import Contact from './pages/Contact';
 import AdminPanel from './pages/AdminPanel';
+import ResetPassword from './pages/ResetPassword';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="contact" element={<Contact />} />
         </Route>
         <Route path="/portfolio-admin" element={<AdminPanel />} />
+        <Route path="/reset-password/:token" element={<ResetPassword />} />
       </Routes>
     </BrowserRouter>
   );

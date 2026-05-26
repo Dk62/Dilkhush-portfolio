@@ -10,17 +10,15 @@ const Footer = () => {
           </h3>
           <p className="text-slate-400 text-sm mt-1">Full-Stack MERN Developer & AI Integration Enthusiast.</p>
         </div>
-        
+
         <div className="flex space-x-6">
-          <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-white transition-colors duration-300">
+          <a href="https://github.com/Dk62" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-white transition-colors duration-300">
             <FaGithub size={24} />
           </a>
-          <a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-white transition-colors duration-300">
+          <a href="https://www.linkedin.com/in/dilkhush-kumar-950691292/" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-white transition-colors duration-300">
             <FaLinkedin size={24} />
           </a>
-          <a href="https://twitter.com/yourusername" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-white transition-colors duration-300">
-            <FaTwitter size={24} />
-          </a>
+
         </div>
       </div>
       <div className="text-center mt-8 text-slate-500 text-sm">
