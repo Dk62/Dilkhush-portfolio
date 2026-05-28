@@ -40,7 +40,7 @@ const Projects = () => {
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const { data } = await axios.get('http://localhost:5000/api/projects');
+        const { data } = await axios.get('/api/projects');
         setProjects(data.length > 0 ? data : fallbackProjects);
       } catch (error) {
         console.error("Failed to fetch projects, using fallback data", error);

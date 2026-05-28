@@ -28,7 +28,7 @@ const ResetPassword = () => {
 
     setSubmitting(true);
     try {
-      await axios.put(`http://localhost:5000/api/admin/reset-password/${token}`, { password });
+      await axios.put(`/api/admin/reset-password/${token}`, { password });
       toast.success('Password reset successful! Please log in.');
       navigate('/portfolio-admin');
     } catch (error) {

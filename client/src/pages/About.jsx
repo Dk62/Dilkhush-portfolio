@@ -7,7 +7,7 @@ const About = () => {
   const [content, setContent] = useState(null);
 
   useEffect(() => {
-    axios.get('http://localhost:5000/api/content')
+    axios.get('/api/content')
       .then(({ data }) => setContent(data))
       .catch(console.error);
   }, []);

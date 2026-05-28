@@ -42,7 +42,7 @@ const AdminPanel = () => {
 
   // --- API Configuration ---
   const api = axios.create({
-    baseURL: 'http://localhost:5000/api',
+    baseURL: '/api',
   });
 
   api.interceptors.request.use((config) => {
@@ -976,7 +976,7 @@ const AdminPanel = () => {
                 
                 <div className="mb-6 p-4 bg-slate-900 rounded-lg border border-slate-700">
                   <p className="text-sm text-slate-400 mb-2">Current Resume URL:</p>
-                  <a href={content.resumeUrl.startsWith('http') ? content.resumeUrl : `http://localhost:5000${content.resumeUrl}`} target="_blank" rel="noopener noreferrer" className="text-emerald-400 hover:underline break-all">
+                  <a href={content.resumeUrl} target="_blank" rel="noopener noreferrer" className="text-emerald-400 hover:underline break-all">
                     {content.resumeUrl}
                   </a>
                 </div>

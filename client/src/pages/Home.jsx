@@ -11,7 +11,7 @@ const Home = () => {
   const [typingSpeed, setTypingSpeed] = useState(150);
 
   useEffect(() => {
-    axios.get('http://localhost:5000/api/content')
+    axios.get('/api/content')
       .then(({ data }) => setContent(data))
       .catch(console.error);
   }, []);
@@ -99,7 +99,7 @@ const Home = () => {
           <Link to="/projects" className="px-8 py-4 rounded-full bg-emerald-500 hover:bg-emerald-400 text-slate-900 font-bold text-lg transition-all duration-300 transform hover:-translate-y-1 w-full sm:w-auto shadow-lg shadow-emerald-500/20">
             View My Work
           </Link>
-          <a href={content.resumeUrl.startsWith('http') ? content.resumeUrl : `http://localhost:5000${content.resumeUrl}`} target="_blank" rel="noopener noreferrer" className="px-8 py-4 rounded-full border border-slate-600 hover:border-emerald-400 text-white hover:text-emerald-400 font-bold text-lg transition-all duration-300 w-full sm:w-auto">
+          <a href={content.resumeUrl} target="_blank" rel="noopener noreferrer" className="px-8 py-4 rounded-full border border-slate-600 hover:border-emerald-400 text-white hover:text-emerald-400 font-bold text-lg transition-all duration-300 w-full sm:w-auto">
             Download Resume
           </a>
         </motion.div>

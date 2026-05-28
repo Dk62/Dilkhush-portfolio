@@ -16,7 +16,7 @@ const Navbar = () => {
     window.addEventListener('scroll', handleScroll);
     
     // Fetch dynamic resume url
-    axios.get('http://localhost:5000/api/content')
+    axios.get('/api/content')
       .then(({ data }) => {
         if (data && data.resumeUrl) setResumeUrl(data.resumeUrl);
       })
@@ -46,7 +46,7 @@ const Navbar = () => {
               {link.name}
             </Link>
           ))}
-          <a href={resumeUrl.startsWith('http') ? resumeUrl : `http://localhost:5000${resumeUrl}`} target="_blank" rel="noopener noreferrer" className="px-5 py-2 rounded-full border border-emerald-400 text-emerald-400 hover:bg-emerald-400 hover:text-slate-900 transition-all duration-300 font-medium">
+          <a href={resumeUrl} target="_blank" rel="noopener noreferrer" className="px-5 py-2 rounded-full border border-emerald-400 text-emerald-400 hover:bg-emerald-400 hover:text-slate-900 transition-all duration-300 font-medium">
             Resume
           </a>
         </div>
@@ -70,7 +70,7 @@ const Navbar = () => {
               {link.name}
             </Link>
           ))}
-          <a href={resumeUrl.startsWith('http') ? resumeUrl : `http://localhost:5000${resumeUrl}`} target="_blank" rel="noopener noreferrer" className="inline-block text-center px-5 py-2 rounded-lg bg-emerald-400 text-slate-900 font-bold" onClick={() => setIsMobileMenuOpen(false)}>
+          <a href={resumeUrl} target="_blank" rel="noopener noreferrer" className="inline-block text-center px-5 py-2 rounded-lg bg-emerald-400 text-slate-900 font-bold" onClick={() => setIsMobileMenuOpen(false)}>
             Resume
           </a>
         </motion.div>
