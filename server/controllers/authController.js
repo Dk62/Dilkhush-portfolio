@@ -71,6 +71,14 @@ const registerAdmin = async (req, res) => {
   const { username, password, email } = req.body;
 
   try {
+    // Dynamic Security Lock: Allow only the first administrative user to register
+    const adminExistsCount = await User.countDocuments({});
+    if (adminExistsCount > 0) {
+      return res.status(403).json({
+        message: 'Admin registration is closed because an administrator account already exists.'
+      });
+    }
+
     const userExists = await User.findOne({ username });
 
     if (userExists) {
@@ -113,7 +121,7 @@ const forgotPassword = async (req, res) => {
     // Fallback: Check if we have a bootstrapped admin and the email matches EMAIL_USER in .env
     if (!user) {
       user = await User.findOne({ username: 'admin' });
-      
+
       if (user && email === process.env.EMAIL_USER) {
         user.email = email;
         await user.save();
@@ -183,7 +191,7 @@ const resetPassword = async (req, res) => {
 
     const salt = await bcrypt.genSalt(10);
     user.password = await bcrypt.hash(password, salt);
-    
+
     user.resetPasswordToken = undefined;
     user.resetPasswordExpire = undefined;
 

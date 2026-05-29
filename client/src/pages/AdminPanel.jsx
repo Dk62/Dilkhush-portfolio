@@ -6,15 +6,15 @@ import { FaPlus, FaEdit, FaTrash, FaSignOutAlt, FaEnvelope, FaBriefcase, FaFileA
 const AdminPanel = () => {
   const [token, setToken] = useState(localStorage.getItem('adminToken') || '');
   const [activeTab, setActiveTab] = useState('projects');
-  
+
   // Login State
   const [loginData, setLoginData] = useState({ username: '', password: '' });
-  
+
   // Data State
   const [projects, setProjects] = useState([]);
   const [messages, setMessages] = useState([]);
   const [content, setContent] = useState(null);
-  
+
   // Project Form State
   const [showProjectForm, setShowProjectForm] = useState(false);
   const [editingId, setEditingId] = useState(null);
@@ -32,7 +32,7 @@ const AdminPanel = () => {
   const [eduEditingIndex, setEduEditingIndex] = useState(null);
   const [certForm, setCertForm] = useState({ title: '', issuer: '', date: '', verificationLink: '' });
   const [certEditingIndex, setCertEditingIndex] = useState(null);
-  
+
   // Auth Form State
   const [isLoginView, setIsLoginView] = useState(true);
   const [isForgotView, setIsForgotView] = useState(false);
@@ -141,8 +141,8 @@ const AdminPanel = () => {
     e.preventDefault();
     const formattedData = {
       ...projectData,
-      techStack: typeof projectData.techStack === 'string' 
-        ? projectData.techStack.split(',').map(s => s.trim()) 
+      techStack: typeof projectData.techStack === 'string'
+        ? projectData.techStack.split(',').map(s => s.trim())
         : projectData.techStack
     };
 
@@ -275,7 +275,7 @@ const AdminPanel = () => {
   const handleResumeUpload = async (e) => {
     e.preventDefault();
     if (!resumeFile) return toast.error('Please select a file');
-    
+
     const formData = new FormData();
     formData.append('resume', resumeFile);
 
@@ -311,17 +311,17 @@ const AdminPanel = () => {
             <form onSubmit={handleForgotPassword} className="space-y-6">
               <div>
                 <label className="block text-sm font-medium text-slate-300 mb-2">Recovery Email</label>
-                <input 
-                  type="email" 
-                  value={forgotEmail} 
+                <input
+                  type="email"
+                  value={forgotEmail}
                   onChange={(e) => setForgotEmail(e.target.value)}
                   className="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-emerald-500 transition-colors"
                   placeholder="Enter recovery email"
                   required
                 />
               </div>
-              <button 
-                type="submit" 
+              <button
+                type="submit"
                 disabled={submittingForgot}
                 className="w-full bg-emerald-500 hover:bg-emerald-400 disabled:opacity-50 text-slate-900 font-bold py-3 rounded-lg transition-colors cursor-pointer flex justify-center items-center"
               >
@@ -342,10 +342,10 @@ const AdminPanel = () => {
             <form onSubmit={handleLogin} className="space-y-6">
               <div>
                 <label className="block text-sm font-medium text-slate-300 mb-2">Username</label>
-                <input 
-                  type="text" 
-                  value={loginData.username} 
-                  onChange={(e) => setLoginData({...loginData, username: e.target.value})}
+                <input
+                  type="text"
+                  value={loginData.username}
+                  onChange={(e) => setLoginData({ ...loginData, username: e.target.value })}
                   className="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-emerald-500 transition-colors"
                   placeholder="Enter username"
                   required
@@ -354,8 +354,8 @@ const AdminPanel = () => {
               <div>
                 <div className="flex justify-between items-center mb-2">
                   <label className="block text-sm font-medium text-slate-300">Password</label>
-                  <button 
-                    type="button" 
+                  <button
+                    type="button"
                     onClick={() => {
                       setIsForgotView(true);
                       setForgotEmail('');
@@ -365,10 +365,10 @@ const AdminPanel = () => {
                     Forgot Password?
                   </button>
                 </div>
-                <input 
-                  type="password" 
-                  value={loginData.password} 
-                  onChange={(e) => setLoginData({...loginData, password: e.target.value})}
+                <input
+                  type="password"
+                  value={loginData.password}
+                  onChange={(e) => setLoginData({ ...loginData, password: e.target.value })}
                   className="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-emerald-500 transition-colors"
                   placeholder="Enter password"
                   required
@@ -382,10 +382,10 @@ const AdminPanel = () => {
             <form onSubmit={handleRegister} className="space-y-6">
               <div>
                 <label className="block text-sm font-medium text-slate-300 mb-2">Username</label>
-                <input 
-                  type="text" 
-                  value={registerData.username} 
-                  onChange={(e) => setRegisterData({...registerData, username: e.target.value})}
+                <input
+                  type="text"
+                  value={registerData.username}
+                  onChange={(e) => setRegisterData({ ...registerData, username: e.target.value })}
                   className="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-emerald-500 transition-colors"
                   placeholder="Choose username"
                   required
@@ -393,20 +393,20 @@ const AdminPanel = () => {
               </div>
               <div>
                 <label className="block text-sm font-medium text-slate-300 mb-2">Email (Optional, for recovery)</label>
-                <input 
-                  type="email" 
-                  value={registerData.email} 
-                  onChange={(e) => setRegisterData({...registerData, email: e.target.value})}
+                <input
+                  type="email"
+                  value={registerData.email}
+                  onChange={(e) => setRegisterData({ ...registerData, email: e.target.value })}
                   className="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-emerald-500 transition-colors"
                   placeholder="admin@example.com"
                 />
               </div>
               <div>
                 <label className="block text-sm font-medium text-slate-300 mb-2">Password</label>
-                <input 
-                  type="password" 
-                  value={registerData.password} 
-                  onChange={(e) => setRegisterData({...registerData, password: e.target.value})}
+                <input
+                  type="password"
+                  value={registerData.password}
+                  onChange={(e) => setRegisterData({ ...registerData, password: e.target.value })}
                   className="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-emerald-500 transition-colors"
                   placeholder="Choose password"
                   required
@@ -414,10 +414,10 @@ const AdminPanel = () => {
               </div>
               <div>
                 <label className="block text-sm font-medium text-slate-300 mb-2">Confirm Password</label>
-                <input 
-                  type="password" 
-                  value={registerData.confirmPassword} 
-                  onChange={(e) => setRegisterData({...registerData, confirmPassword: e.target.value})}
+                <input
+                  type="password"
+                  value={registerData.confirmPassword}
+                  onChange={(e) => setRegisterData({ ...registerData, confirmPassword: e.target.value })}
                   className="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-emerald-500 transition-colors"
                   placeholder="Confirm password"
                   required
@@ -431,16 +431,16 @@ const AdminPanel = () => {
 
           <div className="mt-8 pt-6 border-t border-slate-700 text-center">
             {isForgotView ? (
-              <button 
-                type="button" 
+              <button
+                type="button"
                 onClick={() => setIsForgotView(false)}
                 className="text-emerald-400 hover:text-emerald-300 text-sm font-semibold transition-colors cursor-pointer focus:outline-none"
               >
                 Back to Login
               </button>
             ) : (
-              <button 
-                type="button" 
+              <button
+                type="button"
                 onClick={() => {
                   setIsLoginView(!isLoginView);
                   // Clear inputs on toggle
@@ -473,21 +473,21 @@ const AdminPanel = () => {
         </div>
 
         <div className="flex flex-wrap gap-4 mb-8 border-b border-slate-700 pb-4">
-          <button 
+          <button
             onClick={() => setActiveTab('projects')}
             className={`flex items-center space-x-2 px-4 py-2 rounded-lg font-medium transition-colors ${activeTab === 'projects' ? 'bg-emerald-500/20 text-emerald-400' : 'text-slate-400 hover:text-slate-200'}`}
           >
             <FaBriefcase />
             <span>Manage Projects</span>
           </button>
-          <button 
+          <button
             onClick={() => setActiveTab('content')}
             className={`flex items-center space-x-2 px-4 py-2 rounded-lg font-medium transition-colors ${activeTab === 'content' ? 'bg-emerald-500/20 text-emerald-400' : 'text-slate-400 hover:text-slate-200'}`}
           >
             <FaFileAlt />
             <span>Manage Content</span>
           </button>
-          <button 
+          <button
             onClick={() => setActiveTab('messages')}
             className={`flex items-center space-x-2 px-4 py-2 rounded-lg font-medium transition-colors ${activeTab === 'messages' ? 'bg-emerald-500/20 text-emerald-400' : 'text-slate-400 hover:text-slate-200'}`}
           >
@@ -501,7 +501,7 @@ const AdminPanel = () => {
           <div>
             <div className="flex justify-between items-center mb-6">
               <h3 className="text-2xl font-bold text-slate-200">Projects</h3>
-              <button 
+              <button
                 onClick={() => {
                   setEditingId(null);
                   setProjectData({ title: '', description: '', image: '', techStack: '', githubLink: '', liveLink: '', featured: false });
@@ -519,7 +519,7 @@ const AdminPanel = () => {
               <form onSubmit={handleProjectSubmit} className="bg-slate-800 p-6 rounded-2xl border border-slate-700 mb-8 grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <label className="block text-sm font-medium text-slate-300 mb-1">Title</label>
-                  <input type="text" value={projectData.title} onChange={e => setProjectData({...projectData, title: e.target.value})} required className="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 text-white" />
+                  <input type="text" value={projectData.title} onChange={e => setProjectData({ ...projectData, title: e.target.value })} required className="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 text-white" />
                 </div>
                 <div className="flex flex-col space-y-1.5">
                   <div className="flex justify-between items-center">
@@ -527,30 +527,29 @@ const AdminPanel = () => {
                     <span className="text-xs text-slate-400">or Upload to Cloudinary</span>
                   </div>
                   <div className="flex gap-2">
-                    <input 
-                      type="text" 
-                      value={projectData.image} 
-                      onChange={e => setProjectData({...projectData, image: e.target.value})} 
-                      required 
-                      className="flex-grow bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 text-white text-sm" 
+                    <input
+                      type="text"
+                      value={projectData.image}
+                      onChange={e => setProjectData({ ...projectData, image: e.target.value })}
+                      required
+                      className="flex-grow bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 text-white text-sm"
                       placeholder="https://res.cloudinary.com/..."
                     />
                     <div className="relative shrink-0">
-                      <input 
-                        type="file" 
+                      <input
+                        type="file"
                         accept="image/*"
                         onChange={handleImageUpload}
                         className="hidden"
                         id="project-image-file"
                         disabled={uploadingImage}
                       />
-                      <label 
-                        htmlFor="project-image-file" 
-                        className={`flex items-center space-x-2 px-4 py-2 rounded-lg border border-dashed transition-all duration-300 cursor-pointer font-medium h-full text-xs ${
-                          uploadingImage 
-                            ? 'border-slate-600 bg-slate-800 text-slate-400' 
-                            : 'border-emerald-500/50 hover:border-emerald-400 bg-emerald-500/10 text-emerald-400 hover:bg-emerald-500/20'
-                        }`}
+                      <label
+                        htmlFor="project-image-file"
+                        className={`flex items-center space-x-2 px-4 py-2 rounded-lg border border-dashed transition-all duration-300 cursor-pointer font-medium h-full text-xs ${uploadingImage
+                          ? 'border-slate-600 bg-slate-800 text-slate-400'
+                          : 'border-emerald-500/50 hover:border-emerald-400 bg-emerald-500/10 text-emerald-400 hover:bg-emerald-500/20'
+                          }`}
                       >
                         {uploadingImage ? (
                           <>
@@ -571,18 +570,18 @@ const AdminPanel = () => {
                   </div>
                   {projectData.image && (
                     <div className="relative w-20 h-14 rounded-lg border border-slate-700 overflow-hidden bg-slate-900 mt-1.5 shadow-md">
-                      <img 
-                        src={projectData.image} 
-                        alt="Preview" 
+                      <img
+                        src={projectData.image}
+                        alt="Preview"
                         className="w-full h-full object-cover"
                         onError={(e) => {
                           e.target.onerror = null;
                           e.target.src = 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=200';
                         }}
                       />
-                      <button 
-                        type="button" 
-                        onClick={() => setProjectData({...projectData, image: ''})} 
+                      <button
+                        type="button"
+                        onClick={() => setProjectData({ ...projectData, image: '' })}
                         className="absolute top-0.5 right-0.5 bg-red-500/80 hover:bg-red-600 text-white rounded-full p-0.5 shadow transition-colors"
                         title="Clear Image"
                       >
@@ -593,22 +592,22 @@ const AdminPanel = () => {
                 </div>
                 <div className="md:col-span-2">
                   <label className="block text-sm font-medium text-slate-300 mb-1">Description</label>
-                  <textarea value={projectData.description} onChange={e => setProjectData({...projectData, description: e.target.value})} required rows="3" className="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 text-white resize-none"></textarea>
+                  <textarea value={projectData.description} onChange={e => setProjectData({ ...projectData, description: e.target.value })} required rows="3" className="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 text-white resize-none"></textarea>
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-slate-300 mb-1">Tech Stack (comma separated)</label>
-                  <input type="text" value={projectData.techStack} onChange={e => setProjectData({...projectData, techStack: e.target.value})} required className="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 text-white" />
+                  <input type="text" value={projectData.techStack} onChange={e => setProjectData({ ...projectData, techStack: e.target.value })} required className="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 text-white" />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-slate-300 mb-1">GitHub Link</label>
-                  <input type="text" value={projectData.githubLink} onChange={e => setProjectData({...projectData, githubLink: e.target.value})} className="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 text-white" />
+                  <input type="text" value={projectData.githubLink} onChange={e => setProjectData({ ...projectData, githubLink: e.target.value })} className="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 text-white" />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-slate-300 mb-1">Live Link</label>
-                  <input type="text" value={projectData.liveLink} onChange={e => setProjectData({...projectData, liveLink: e.target.value})} className="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 text-white" />
+                  <input type="text" value={projectData.liveLink} onChange={e => setProjectData({ ...projectData, liveLink: e.target.value })} className="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 text-white" />
                 </div>
                 <div className="flex items-center md:col-span-2">
-                  <input type="checkbox" checked={projectData.featured} onChange={e => setProjectData({...projectData, featured: e.target.checked})} className="mr-2 w-4 h-4 text-emerald-500 bg-slate-900 border-slate-700 rounded focus:ring-emerald-500 focus:ring-2" />
+                  <input type="checkbox" checked={projectData.featured} onChange={e => setProjectData({ ...projectData, featured: e.target.checked })} className="mr-2 w-4 h-4 text-emerald-500 bg-slate-900 border-slate-700 rounded focus:ring-emerald-500 focus:ring-2" />
                   <label className="text-sm font-medium text-slate-300">Featured Project</label>
                 </div>
                 <div className="md:col-span-2 text-right">
@@ -676,19 +675,19 @@ const AdminPanel = () => {
                 <form onSubmit={handleContentUpdate} className="space-y-6">
                   <div>
                     <label className="block text-sm font-medium text-slate-300 mb-1">Hero Headline</label>
-                    <input type="text" value={content.hero.headline} onChange={e => setContent({...content, hero: {...content.hero, headline: e.target.value}})} required className="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 text-white" />
+                    <input type="text" value={content.hero.headline} onChange={e => setContent({ ...content, hero: { ...content.hero, headline: e.target.value } })} required className="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 text-white" />
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-slate-300 mb-1">Hero Sub-Headline</label>
-                    <textarea value={content.hero.subHeadline} onChange={e => setContent({...content, hero: {...content.hero, subHeadline: e.target.value}})} required rows="2" className="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 text-white resize-none"></textarea>
+                    <textarea value={content.hero.subHeadline} onChange={e => setContent({ ...content, hero: { ...content.hero, subHeadline: e.target.value } })} required rows="2" className="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 text-white resize-none"></textarea>
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-slate-300 mb-1">Hero Typing Text (use | for multiple)</label>
-                    <input type="text" value={content.hero.typingText} onChange={e => setContent({...content, hero: {...content.hero, typingText: e.target.value}})} required className="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 text-white" />
+                    <input type="text" value={content.hero.typingText} onChange={e => setContent({ ...content, hero: { ...content.hero, typingText: e.target.value } })} required className="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 text-white" />
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-slate-300 mb-1">About Me Text</label>
-                    <textarea value={content.about.text} onChange={e => setContent({...content, about: {...content.about, text: e.target.value}})} required rows="5" className="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 text-white resize-none"></textarea>
+                    <textarea value={content.about.text} onChange={e => setContent({ ...content, about: { ...content.about, text: e.target.value } })} required rows="5" className="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 text-white resize-none"></textarea>
                   </div>
                   <div className="text-right">
                     <button type="submit" className="px-6 py-2 bg-emerald-500 hover:bg-emerald-400 text-slate-900 rounded-lg font-bold transition-colors">
@@ -709,7 +708,7 @@ const AdminPanel = () => {
                         <button type="button" onClick={() => {
                           const newSkills = [...content.skills];
                           newSkills.splice(index, 1);
-                          setContent({...content, skills: newSkills});
+                          setContent({ ...content, skills: newSkills });
                         }} className="text-red-400 hover:text-red-300"><FaTrash /></button>
                       </div>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -718,7 +717,7 @@ const AdminPanel = () => {
                           <input type="text" value={skill.category} onChange={e => {
                             const newSkills = [...content.skills];
                             newSkills[index].category = e.target.value;
-                            setContent({...content, skills: newSkills});
+                            setContent({ ...content, skills: newSkills });
                           }} className="w-full bg-slate-800 border border-slate-600 rounded px-3 py-2 text-white text-sm" />
                         </div>
                         <div>
@@ -726,7 +725,7 @@ const AdminPanel = () => {
                           <input type="text" value={skill.icon} onChange={e => {
                             const newSkills = [...content.skills];
                             newSkills[index].icon = e.target.value;
-                            setContent({...content, skills: newSkills});
+                            setContent({ ...content, skills: newSkills });
                           }} className="w-full bg-slate-800 border border-slate-600 rounded px-3 py-2 text-white text-sm" />
                         </div>
                         <div className="md:col-span-2">
@@ -734,16 +733,16 @@ const AdminPanel = () => {
                           <input type="text" value={skill.items.join(', ')} onChange={e => {
                             const newSkills = [...content.skills];
                             newSkills[index].items = e.target.value.split(',').map(s => s.trim());
-                            setContent({...content, skills: newSkills});
+                            setContent({ ...content, skills: newSkills });
                           }} className="w-full bg-slate-800 border border-slate-600 rounded px-3 py-2 text-white text-sm" />
                         </div>
                       </div>
                     </div>
                   ))}
-                  
+
                   <div className="flex justify-between items-center pt-4">
                     <button type="button" onClick={() => {
-                      setContent({...content, skills: [...content.skills, { category: 'New Category', icon: 'FaCode', items: [] }]});
+                      setContent({ ...content, skills: [...content.skills, { category: 'New Category', icon: 'FaCode', items: [] }] });
                     }} className="flex items-center space-x-2 text-emerald-400 hover:text-emerald-300 font-medium">
                       <FaPlus size={14} /> <span>Add Category</span>
                     </button>
@@ -757,7 +756,7 @@ const AdminPanel = () => {
               {/* Education Form */}
               <div className="bg-slate-800 p-6 rounded-2xl border border-slate-700 mt-8">
                 <h3 className="text-2xl font-bold text-slate-200 mb-6">Manage Education</h3>
-                
+
                 {/* Current Education List */}
                 <div className="mb-6 space-y-3">
                   {(content.education || []).map((edu, idx) => (
@@ -792,45 +791,45 @@ const AdminPanel = () => {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-xs text-slate-400 mb-1">Degree / Field of Study *</label>
-                      <input 
-                        type="text" 
-                        value={eduForm.degree} 
-                        onChange={e => setEduForm({...eduForm, degree: e.target.value})} 
-                        className="w-full bg-slate-900 border border-slate-750 rounded px-3 py-2 text-white text-sm focus:outline-none focus:border-emerald-500" 
+                      <input
+                        type="text"
+                        value={eduForm.degree}
+                        onChange={e => setEduForm({ ...eduForm, degree: e.target.value })}
+                        className="w-full bg-slate-900 border border-slate-750 rounded px-3 py-2 text-white text-sm focus:outline-none focus:border-emerald-500"
                         placeholder="e.g. BCA, Class XII"
-                        required 
+                        required
                       />
                     </div>
                     <div>
                       <label className="block text-xs text-slate-400 mb-1">Institution / School *</label>
-                      <input 
-                        type="text" 
-                        value={eduForm.institution} 
-                        onChange={e => setEduForm({...eduForm, institution: e.target.value})} 
-                        className="w-full bg-slate-900 border border-slate-750 rounded px-3 py-2 text-white text-sm focus:outline-none focus:border-emerald-500" 
+                      <input
+                        type="text"
+                        value={eduForm.institution}
+                        onChange={e => setEduForm({ ...eduForm, institution: e.target.value })}
+                        className="w-full bg-slate-900 border border-slate-750 rounded px-3 py-2 text-white text-sm focus:outline-none focus:border-emerald-500"
                         placeholder="e.g. Patna University"
-                        required 
+                        required
                       />
                     </div>
                     <div>
                       <label className="block text-xs text-slate-400 mb-1">Duration *</label>
-                      <input 
-                        type="text" 
-                        value={eduForm.duration} 
-                        onChange={e => setEduForm({...eduForm, duration: e.target.value})} 
-                        className="w-full bg-slate-900 border border-slate-750 rounded px-3 py-2 text-white text-sm focus:outline-none focus:border-emerald-500" 
+                      <input
+                        type="text"
+                        value={eduForm.duration}
+                        onChange={e => setEduForm({ ...eduForm, duration: e.target.value })}
+                        className="w-full bg-slate-900 border border-slate-750 rounded px-3 py-2 text-white text-sm focus:outline-none focus:border-emerald-500"
                         placeholder="e.g. 2023 - 2026, 2021 - 2023"
-                        required 
+                        required
                       />
                     </div>
                     <div>
                       <label className="block text-xs text-slate-400 mb-1">Score / Grade (Optional)</label>
-                      <input 
-                        type="text" 
-                        value={eduForm.score} 
-                        onChange={e => setEduForm({...eduForm, score: e.target.value})} 
-                        className="w-full bg-slate-900 border border-slate-750 rounded px-3 py-2 text-white text-sm focus:outline-none focus:border-emerald-500" 
-                        placeholder="e.g. 8.9 CGPA, 92%" 
+                      <input
+                        type="text"
+                        value={eduForm.score}
+                        onChange={e => setEduForm({ ...eduForm, score: e.target.value })}
+                        className="w-full bg-slate-900 border border-slate-750 rounded px-3 py-2 text-white text-sm focus:outline-none focus:border-emerald-500"
+                        placeholder="e.g. 8.9 CGPA, 92%"
                       />
                     </div>
                   </div>
@@ -839,8 +838,8 @@ const AdminPanel = () => {
                       {eduEditingIndex !== null ? 'Update Item in List' : 'Add Item to List'}
                     </button>
                     {eduEditingIndex !== null && (
-                      <button 
-                        type="button" 
+                      <button
+                        type="button"
                         onClick={() => {
                           setEduEditingIndex(null);
                           setEduForm({ degree: '', institution: '', duration: '', score: '' });
@@ -864,7 +863,7 @@ const AdminPanel = () => {
               {/* Certifications Form */}
               <div className="bg-slate-800 p-6 rounded-2xl border border-slate-700 mt-8">
                 <h3 className="text-2xl font-bold text-slate-200 mb-6">Manage Certifications</h3>
-                
+
                 {/* Current Certifications List */}
                 <div className="mb-6 space-y-3">
                   {(content.certifications || []).map((cert, idx) => (
@@ -899,45 +898,45 @@ const AdminPanel = () => {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-xs text-slate-400 mb-1">Certification Title *</label>
-                      <input 
-                        type="text" 
-                        value={certForm.title} 
-                        onChange={e => setCertForm({...certForm, title: e.target.value})} 
-                        className="w-full bg-slate-900 border border-slate-750 rounded px-3 py-2 text-white text-sm focus:outline-none focus:border-emerald-500" 
+                      <input
+                        type="text"
+                        value={certForm.title}
+                        onChange={e => setCertForm({ ...certForm, title: e.target.value })}
+                        className="w-full bg-slate-900 border border-slate-750 rounded px-3 py-2 text-white text-sm focus:outline-none focus:border-emerald-500"
                         placeholder="e.g. AWS Certified Developer"
-                        required 
+                        required
                       />
                     </div>
                     <div>
                       <label className="block text-xs text-slate-400 mb-1">Issuing Organization *</label>
-                      <input 
-                        type="text" 
-                        value={certForm.issuer} 
-                        onChange={e => setCertForm({...certForm, issuer: e.target.value})} 
-                        className="w-full bg-slate-900 border border-slate-750 rounded px-3 py-2 text-white text-sm focus:outline-none focus:border-emerald-500" 
+                      <input
+                        type="text"
+                        value={certForm.issuer}
+                        onChange={e => setCertForm({ ...certForm, issuer: e.target.value })}
+                        className="w-full bg-slate-900 border border-slate-750 rounded px-3 py-2 text-white text-sm focus:outline-none focus:border-emerald-500"
                         placeholder="e.g. Amazon Web Services"
-                        required 
+                        required
                       />
                     </div>
                     <div>
                       <label className="block text-xs text-slate-400 mb-1">Date Issued *</label>
-                      <input 
-                        type="text" 
-                        value={certForm.date} 
-                        onChange={e => setCertForm({...certForm, date: e.target.value})} 
-                        className="w-full bg-slate-900 border border-slate-750 rounded px-3 py-2 text-white text-sm focus:outline-none focus:border-emerald-500" 
+                      <input
+                        type="text"
+                        value={certForm.date}
+                        onChange={e => setCertForm({ ...certForm, date: e.target.value })}
+                        className="w-full bg-slate-900 border border-slate-750 rounded px-3 py-2 text-white text-sm focus:outline-none focus:border-emerald-500"
                         placeholder="e.g. May 2025"
-                        required 
+                        required
                       />
                     </div>
                     <div>
                       <label className="block text-xs text-slate-400 mb-1">Credential URL / Verification Link (Optional)</label>
-                      <input 
-                        type="text" 
-                        value={certForm.verificationLink} 
-                        onChange={e => setCertForm({...certForm, verificationLink: e.target.value})} 
-                        className="w-full bg-slate-900 border border-slate-750 rounded px-3 py-2 text-white text-sm focus:outline-none focus:border-emerald-500" 
-                        placeholder="e.g. https://credly.com/..." 
+                      <input
+                        type="text"
+                        value={certForm.verificationLink}
+                        onChange={e => setCertForm({ ...certForm, verificationLink: e.target.value })}
+                        className="w-full bg-slate-900 border border-slate-750 rounded px-3 py-2 text-white text-sm focus:outline-none focus:border-emerald-500"
+                        placeholder="e.g. https://credly.com/..."
                       />
                     </div>
                   </div>
@@ -946,8 +945,8 @@ const AdminPanel = () => {
                       {certEditingIndex !== null ? 'Update Item in List' : 'Add Item to List'}
                     </button>
                     {certEditingIndex !== null && (
-                      <button 
-                        type="button" 
+                      <button
+                        type="button"
                         onClick={() => {
                           setCertEditingIndex(null);
                           setCertForm({ title: '', issuer: '', date: '', verificationLink: '' });
@@ -973,7 +972,7 @@ const AdminPanel = () => {
               {/* Resume Upload */}
               <div className="bg-slate-800 p-6 rounded-2xl border border-slate-700">
                 <h3 className="text-2xl font-bold text-slate-200 mb-6">Resume</h3>
-                
+
                 <div className="mb-6 p-4 bg-slate-900 rounded-lg border border-slate-700">
                   <p className="text-sm text-slate-400 mb-2">Current Resume URL:</p>
                   <a href={content.resumeUrl} target="_blank" rel="noopener noreferrer" className="text-emerald-400 hover:underline break-all">
@@ -984,11 +983,11 @@ const AdminPanel = () => {
                 <form onSubmit={handleResumeUpload} className="space-y-4">
                   <div>
                     <label className="block text-sm font-medium text-slate-300 mb-2">Upload New PDF</label>
-                    <input 
-                      type="file" 
+                    <input
+                      type="file"
                       accept=".pdf"
                       onChange={e => setResumeFile(e.target.files[0])}
-                      className="block w-full text-sm text-slate-400 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-bold file:bg-emerald-500/20 file:text-emerald-400 hover:file:bg-emerald-500/30 transition-all cursor-pointer" 
+                      className="block w-full text-sm text-slate-400 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-bold file:bg-emerald-500/20 file:text-emerald-400 hover:file:bg-emerald-500/30 transition-all cursor-pointer"
                     />
                   </div>
                   <button type="submit" disabled={!resumeFile || uploadingResume} className="w-full flex items-center justify-center space-x-2 px-4 py-2 bg-slate-700 hover:bg-slate-600 disabled:opacity-50 disabled:cursor-not-allowed text-white rounded-lg transition-colors font-medium">
@@ -1016,31 +1015,31 @@ const AdminPanel = () => {
         {/* --- Messages Tab --- */}
         {activeTab === 'messages' && (
           <div>
-             <h3 className="text-2xl font-bold text-slate-200 mb-6">Contact Messages</h3>
-             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {messages.map((msg) => (
-                  <div key={msg._id} className="bg-slate-800 p-6 rounded-2xl border border-slate-700 flex flex-col">
-                    <div className="flex justify-between items-start mb-4">
-                      <div>
-                        <h4 className="font-bold text-white text-lg">{msg.name}</h4>
-                        <a href={`mailto:${msg.email}`} className="text-emerald-400 text-sm hover:underline">{msg.email}</a>
-                      </div>
-                      <span className="text-xs text-slate-500">{new Date(msg.createdAt).toLocaleDateString()}</span>
+            <h3 className="text-2xl font-bold text-slate-200 mb-6">Contact Messages</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {messages.map((msg) => (
+                <div key={msg._id} className="bg-slate-800 p-6 rounded-2xl border border-slate-700 flex flex-col">
+                  <div className="flex justify-between items-start mb-4">
+                    <div>
+                      <h4 className="font-bold text-white text-lg">{msg.name}</h4>
+                      <a href={`mailto:${msg.email}`} className="text-emerald-400 text-sm hover:underline">{msg.email}</a>
                     </div>
-                    <div className="mb-2 font-medium text-slate-300 border-b border-slate-700 pb-2">
-                      Subject: {msg.subject}
-                    </div>
-                    <p className="text-slate-400 text-sm mt-2 flex-grow overflow-y-auto max-h-32">
-                      {msg.message}
-                    </p>
+                    <span className="text-xs text-slate-500">{new Date(msg.createdAt).toLocaleDateString()}</span>
                   </div>
-                ))}
-                {messages.length === 0 && (
-                  <div className="col-span-full text-center py-12 text-slate-400 bg-slate-800 rounded-2xl border border-slate-700">
-                    No messages received yet.
+                  <div className="mb-2 font-medium text-slate-300 border-b border-slate-700 pb-2">
+                    Subject: {msg.subject}
                   </div>
-                )}
-             </div>
+                  <p className="text-slate-400 text-sm mt-2 flex-grow overflow-y-auto max-h-32">
+                    {msg.message}
+                  </p>
+                </div>
+              ))}
+              {messages.length === 0 && (
+                <div className="col-span-full text-center py-12 text-slate-400 bg-slate-800 rounded-2xl border border-slate-700">
+                  No messages received yet.
+                </div>
+              )}
+            </div>
           </div>
         )}
 
