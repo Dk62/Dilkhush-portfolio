@@ -20,7 +20,7 @@ const Contact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
+
     try {
       await axios.post('/api/contact', formData);
       toast.success('Message sent successfully! I will get back to you soon.');
@@ -35,7 +35,7 @@ const Contact = () => {
   return (
     <div className="py-20 px-6">
       <div className="container mx-auto max-w-6xl">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
@@ -50,7 +50,7 @@ const Contact = () => {
 
         <div className="flex flex-col lg:flex-row gap-12">
           {/* Contact Info */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: -40 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -58,7 +58,7 @@ const Contact = () => {
           >
             <div className="bg-slate-800/50 p-8 rounded-2xl border border-slate-700">
               <h3 className="text-2xl font-bold text-white mb-8">Contact Information</h3>
-              
+
               <div className="space-y-6">
                 <div className="flex items-start">
                   <div className="bg-slate-700/50 p-3 rounded-lg text-emerald-400 mr-4">
@@ -66,22 +66,22 @@ const Contact = () => {
                   </div>
                   <div>
                     <p className="text-slate-400 text-sm font-medium mb-1">Email</p>
-                    <a href="mailto:your.email@example.com" className="text-slate-200 hover:text-emerald-400 transition-colors">
-                      your.email@example.com
+                    <a href="mailto:[dilkhushk922@gmail.com]" className="text-slate-200 hover:text-emerald-400 transition-colors">
+                      [dilkhushk922@gmail.com]
                     </a>
                   </div>
                 </div>
-                
+
                 <div className="flex items-start">
                   <div className="bg-slate-700/50 p-3 rounded-lg text-emerald-400 mr-4">
                     <FaPhone size={24} />
                   </div>
                   <div>
                     <p className="text-slate-400 text-sm font-medium mb-1">Phone</p>
-                    <p className="text-slate-200">+91 9876543210</p>
+                    <p className="text-slate-200">+91 6206137741</p>
                   </div>
                 </div>
-                
+
                 <div className="flex items-start">
                   <div className="bg-slate-700/50 p-3 rounded-lg text-emerald-400 mr-4">
                     <FaMapMarkerAlt size={24} />
@@ -96,7 +96,7 @@ const Contact = () => {
           </motion.div>
 
           {/* Contact Form */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: 40 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
@@ -106,11 +106,11 @@ const Contact = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-slate-300 mb-2">Your Name</label>
-                  <input 
-                    type="text" 
-                    id="name" 
-                    name="name" 
-                    value={formData.name} 
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    value={formData.name}
                     onChange={handleChange}
                     required
                     className="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-colors"
@@ -119,11 +119,11 @@ const Contact = () => {
                 </div>
                 <div>
                   <label htmlFor="email" className="block text-sm font-medium text-slate-300 mb-2">Your Email</label>
-                  <input 
-                    type="email" 
-                    id="email" 
-                    name="email" 
-                    value={formData.email} 
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value={formData.email}
                     onChange={handleChange}
                     required
                     className="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-colors"
@@ -131,27 +131,27 @@ const Contact = () => {
                   />
                 </div>
               </div>
-              
+
               <div className="mb-6">
                 <label htmlFor="subject" className="block text-sm font-medium text-slate-300 mb-2">Subject</label>
-                <input 
-                  type="text" 
-                  id="subject" 
-                  name="subject" 
-                  value={formData.subject} 
+                <input
+                  type="text"
+                  id="subject"
+                  name="subject"
+                  value={formData.subject}
                   onChange={handleChange}
                   required
                   className="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-colors"
                   placeholder="Project Inquiry"
                 />
               </div>
-              
+
               <div className="mb-8">
                 <label htmlFor="message" className="block text-sm font-medium text-slate-300 mb-2">Message</label>
-                <textarea 
-                  id="message" 
-                  name="message" 
-                  value={formData.message} 
+                <textarea
+                  id="message"
+                  name="message"
+                  value={formData.message}
                   onChange={handleChange}
                   required
                   rows="5"
@@ -159,9 +159,9 @@ const Contact = () => {
                   placeholder="Tell me about your project..."
                 ></textarea>
               </div>
-              
-              <button 
-                type="submit" 
+
+              <button
+                type="submit"
                 disabled={isSubmitting}
                 className="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-900 font-bold py-4 rounded-lg flex items-center justify-center space-x-2 transition-colors disabled:opacity-70 disabled:cursor-not-allowed"
               >
