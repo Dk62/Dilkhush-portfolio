@@ -60,7 +60,7 @@ const Home = () => {
           transition={{ duration: 0.8 }}
           className="mb-8"
         >
-          <img src="/media/dev.png" alt="Developer Avatar" className="w-32 h-32 mx-auto rounded-full object-cover border-4 border-emerald-500/50 shadow-xl shadow-emerald-500/20" />
+          <img src="/media/profile.jpeg" alt="Developer Avatar" className="w-32 h-32 mx-auto rounded-full object-cover border-4 border-emerald-500/50 shadow-xl shadow-emerald-500/20" />
         </motion.div>
 
         <motion.h1 
