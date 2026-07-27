@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Fullstack Dilkhush Portfolio",
   "main": "server/server.js",
+  "engines": {
+    "node": "24.x"
+  },
   "scripts": {
     "install-client": "cd client && npm install",
     "install-server": "cd server && npm install",
