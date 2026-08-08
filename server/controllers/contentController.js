@@ -58,18 +58,26 @@ const uploadResume = async (req, res) => {
       return res.status(400).json({ message: 'No file uploaded' });
     }
 
-    // Upload PDF to Cloudinary as an image resource (enables public PDF delivery)
-    const result = await cloudinary.uploader.upload(req.file.path, {
-      folder: 'portfolio/resumes',
-      resource_type: 'image'
-    });
+    let fileUrl;
 
-    // Remove the local temp file
-    if (fs.existsSync(req.file.path)) {
-      fs.unlinkSync(req.file.path);
+    if (process.env.CLOUDINARY_CLOUD_NAME && process.env.CLOUDINARY_API_KEY && process.env.CLOUDINARY_API_SECRET) {
+      try {
+        const result = await cloudinary.uploader.upload(req.file.path, {
+          folder: 'portfolio/resumes',
+          resource_type: 'auto'
+        });
+        fileUrl = result.secure_url;
+        if (fs.existsSync(req.file.path)) {
+          fs.unlinkSync(req.file.path);
+        }
+      } catch (cloudErr) {
+        console.warn('Cloudinary upload failed, falling back to local file:', cloudErr);
+        fileUrl = `/uploads/${path.basename(req.file.path)}`;
+      }
+    } else {
+      // Serve via Express static /uploads
+      fileUrl = `/uploads/${path.basename(req.file.path)}`;
     }
-
-    const fileUrl = result.secure_url;
 
     const content = await getOrCreateContent();
     content.resumeUrl = fileUrl;
@@ -84,7 +92,7 @@ const uploadResume = async (req, res) => {
         console.error('Failed to delete temp file:', err);
       }
     }
-    console.error('Cloudinary resume upload error:', error);
+    console.error('Resume upload error:', error);
     res.status(500).json({ message: 'Server Error uploading resume' });
   }
 };

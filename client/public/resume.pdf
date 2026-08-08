@@ -1,0 +1,53 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Count 1 /Kids [ 3 0 R ] >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [ 0 0 612 792 ] /Contents 4 0 R /Resources << /Font << /F1 5 0 R >> >> >>
+endobj
+4 0 obj
+<< /Length 380 >>
+stream
+BT
+/F1 20 Tf
+50 730 Td
+(Dilkhush Kumar - Full Stack Developer) Tj
+/F1 11 Tf
+0 -25 Td
+(Begusarai, Bihar, India | Email: dilkhushk922@gmail.com | Phone: +91-6206137741) Tj
+0 -18 Td
+(GitHub: https://github.com/Dk62 | LinkedIn: linkedin.com/in/dilkhush-kumar-950691292) Tj
+0 -35 Td
+(SUMMARY) Tj
+0 -18 Td
+(Full Stack Developer and BCA Graduate with hands-on experience in React.js, Node.js, Express.js,) Tj
+0 -15 Td
+(MySQL, MongoDB, Python, Java, and REST API development.) Tj
+0 -35 Td
+(EDUCATION) Tj
+0 -18 Td
+(Bachelor of Computer Applications (BCA) | Ganga Global Institute of Mgmt Studies (2023-2026)) Tj
+0 -18 Td
+(Higher Secondary (12th) | MRJD College (2020) | Secondary (10th) | Swami Dharmanand School (2018)) Tj
+ET
+endstream
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000254 00000 n 
+0000000686 00000 n 
+trailer
+<< /Size 6 /Root 1 0 R >>
+startxref
+756
+%%EOF
